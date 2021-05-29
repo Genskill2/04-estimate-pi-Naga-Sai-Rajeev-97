@@ -3,12 +3,28 @@
 #include <stdio.h>
 #include <math.h>
 
-float mc_pi(int);
 
 float frandom() {
   long int q = random();
   float ret = (float)q/(float)RAND_MAX;
   return ret;
+}
+
+float mc_pi(int iter)
+{
+  float x=0,y=0;//coordinates of dart
+  int n_dart_in=0;//no. of darts in the circle
+  float dist;
+  for(int i=0;i<iter;i++)
+  {
+      x=frandom();//generating random x coordinate
+      y=frandom();//generating random y coordinate
+      //distance of a point from origin
+      dist=(float)sqrt(pow(x,2)+pow(y,2));
+      //check if the pt lies in or on the circle
+      if(dist<=1){n_dart_in++;}
+  }
+  return (4.0*n_dart_in)/iter;
 }
 
 int main(void) {
